@@ -8,7 +8,7 @@ close_tags = ["</body>" , "</html>"]
 
 tags = [ "<h1>" , "</h1>" , "<h2>" , "</h2>" , "<h3>" , "</h3>" , "<h4>" , "</h4>" , "<h5>" , "</h5>" , "<h6>" , "</h6>" , "<a>" , "</a>" , "<p>" , "</p>" , "<br>"]
 
-class page:
+class HTML:
 	f = ""
 	def __init__(self , f):
 		f = str(f)
@@ -16,7 +16,12 @@ class page:
 			f = f + ".html"
 		self.f = f
 		pgname = open(f , 'a')
-		self.pgname = pgname	
+		pgname.close()
+		pgname = open(f , 'r+')
+		self.pgname = pgname
+		strpg = pgname.readlines()
+		strph = str(strpg)
+		self.strpg = strpg
 	lines = 0
 	def file_name(self):
 		return self.f
@@ -57,9 +62,8 @@ class page:
 class script:
 	print "TODO"
 
-class style_sheet:
+class CSS:
 	print "TODO"
-
 
 print "1. New File"
 print "2. Open File"
@@ -67,12 +71,12 @@ w = raw_input("->")
 w = int(w)
 if w == 1:
 	name = raw_input("File name:")
-	npage = page(name)
+	npage = HTML(name)
 	print "Page Setup"
 	npage.start_tags()
-
 	print "1. Paragraph"
 	print "2. Headers"
 	print "3. Other Tags"
 	print "4. Style"
-	print "5. Scripts"
+	print "5. Scripts"	
+	print npage.strpg
